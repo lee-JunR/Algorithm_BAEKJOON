@@ -1,9 +1,6 @@
-def fib_dp(n):
-    if dp[n] == -1:
-        dp[n] = fib_dp(n-1) + fib_dp(n-2)
-    return dp[n]
-
-dp = [-1]*46
-dp[0] = 0
+m = int(input())
+dp = [0] * (m+1)
 dp[1] = 1
-print(fib_dp(int(input())))
+for i in range(2, m+1):
+    dp[i] = dp[i-1] + dp[i-2]
+print(dp[m])
