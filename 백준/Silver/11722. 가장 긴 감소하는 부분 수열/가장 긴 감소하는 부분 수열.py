@@ -1,8 +1,10 @@
-n = int(input())
-nums = list(map(int, input().split()))
-dp = [1 for i in range(n)]
-for i in range(n):
+N = int(input())
+A = list(map(int, input().split()))
+
+dp = N * [1]
+
+for i in range(N):
     for j in range(i):
-        if nums[j] > nums[i]:
-            dp[i] = max(dp[i],dp[j]+1)
+        if A[i] < A[j]:
+            dp[i] = max(dp[i], dp[j]+1)
 print(max(dp))
