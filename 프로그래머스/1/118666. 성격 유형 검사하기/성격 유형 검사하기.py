@@ -1,4 +1,4 @@
-class solution_class():
+class Solution:
     def __init__(self, survey, choices):
         self.survey = survey
         self.choices = choices
@@ -15,30 +15,23 @@ class solution_class():
         }
         self.answer = [0] * 4  # answer 초기화 R, C, J, A
 
-    def calculate_score(self):  # 결과 문자열 변환 함수
+    def calculate_score(self):
         for i in range(len(self.survey)):
-            self.scores[self.survey[i]] += self.scoreboard[self.choices[i] - 1]
-
-        self.answer[0] = self._compare('RT', 'TR')
-        self.answer[1] = self._compare('CF', 'FC')
-        self.answer[2] = self._compare('JM', 'MJ')
-        self.answer[3] = self._compare('AN', 'NA')
-
-    def _compare(self, key1, key2):
-        if self.scores[key1] < self.scores[key2]:
-            return 1
-        return 0
+            # 각 선택지에 대해 해당하는 지표의 점수를 계산하여 누적
+            survey_type = self.survey[i]
+            choice = self.choices[i]
+            self.scores[survey_type] += self.scoreboard[choice - 1]
 
     def get_result(self):
         self.calculate_score()
         result = ""
-        for i in range(4):
-            if self.answer[i] == 0:
-                result += "RTCFJMAN"[i * 2]
+        for i, survey_type in enumerate(["RT", "CF", "JM", "AN"]):
+            # 각 지표별로 높은 점수를 받은 성격 유형을 선택
+            if self.scores[survey_type] < self.scores[survey_type[::-1]]:
+                result += survey_type[1]  # 높은 점수를 받은 성격 유형의 두 번째 문자
             else:
-                result += "RTCFJMAN"[i * 2 + 1]
+                result += survey_type[0]  # 높은 점수를 받은 성격 유형의 첫 번째 문자
         return result
-
 def solution(survey, choices):
-    answer = solution_class(survey, choices)
-    return answer.get_result()
+    answer = Solution(survey, choices).get_result()
+    return answer
