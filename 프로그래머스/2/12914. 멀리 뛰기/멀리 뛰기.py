@@ -1,12 +1,7 @@
 def solution(n):
-    if n <= 1:
-        return 1
-
-    memo = [0] * 2000
-    memo[1] = 1
-    memo[2] = 2
-
-    for i in range(3, n + 1):
-        memo[i] = (memo[i - 1] + memo[i - 2]) % 1234567
-
-    return memo[n]
+    l = [1, 1]
+    if n < 2:
+        return l[n-1]
+    for i in range(2, n + 2):
+        l.append((l[i - 1] + l[i - 2]) % 1234567)
+    return l[n]

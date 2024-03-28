@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 10.3 MB, 시간: 0.62 ms
+메모리: 10.1 MB, 시간: 0.67 ms
 
 ### 구분
 
@@ -16,50 +16,50 @@
 
 ### 제출 일자
 
-2024년 03월 28일 20:55:53
+2024년 03월 28일 21:53:50
 
 ### 문제 설명
 
-<p element-id="149">효진이는 멀리 뛰기를 연습하고 있습니다. 효진이는 한번에 1칸, 또는 2칸을 뛸 수 있습니다. 칸이 총 4개 있을 때, 효진이는<br element-id="148">
-(1칸, 1칸, 1칸, 1칸)<br element-id="147">
-(1칸, 2칸, 1칸)<br element-id="146">
-(1칸, 1칸, 2칸)<br element-id="145">
-(2칸, 1칸, 1칸)<br element-id="144">
-(2칸, 2칸)<br element-id="143">
+<p element-id="186">효진이는 멀리 뛰기를 연습하고 있습니다. 효진이는 한번에 1칸, 또는 2칸을 뛸 수 있습니다. 칸이 총 4개 있을 때, 효진이는<br element-id="185">
+(1칸, 1칸, 1칸, 1칸)<br element-id="184">
+(1칸, 2칸, 1칸)<br element-id="183">
+(1칸, 1칸, 2칸)<br element-id="182">
+(2칸, 1칸, 1칸)<br element-id="181">
+(2칸, 2칸)<br element-id="180">
 의 5가지 방법으로 맨 끝 칸에 도달할 수 있습니다. 멀리뛰기에 사용될 칸의 수 n이 주어질 때, 효진이가 끝에 도달하는 방법이 몇 가지인지 알아내, 여기에 1234567를 나눈 나머지를 리턴하는 함수, solution을 완성하세요. 예를 들어 4가 입력된다면, 5를 return하면 됩니다.</p>
 
-<h5 element-id="142">제한 사항</h5>
+<h5 element-id="179">제한 사항</h5>
 
-<ul element-id="141">
-<li element-id="140">n은 1 이상, 2000 이하인 정수입니다.</li>
+<ul element-id="178">
+<li element-id="177">n은 1 이상, 2000 이하인 정수입니다.</li>
 </ul>
 
-<h5 element-id="139">입출력 예</h5>
-<table class="table" element-id="138">
-        <thead element-id="137"><tr element-id="136">
-<th element-id="135">n</th>
-<th element-id="134">result</th>
+<h5 element-id="176">입출력 예</h5>
+<table class="table" element-id="175">
+        <thead element-id="174"><tr element-id="173">
+<th element-id="172">n</th>
+<th element-id="171">result</th>
 </tr>
 </thead>
-        <tbody element-id="133"><tr element-id="132">
-<td element-id="131">4</td>
-<td element-id="130">5</td>
+        <tbody element-id="170"><tr element-id="169">
+<td element-id="168">4</td>
+<td element-id="167">5</td>
 </tr>
-<tr element-id="129">
-<td element-id="128">3</td>
-<td element-id="127">3</td>
+<tr element-id="166">
+<td element-id="165">3</td>
+<td element-id="164">3</td>
 </tr>
 </tbody>
       </table>
-<h5 element-id="126">입출력 예 설명</h5>
+<h5 element-id="163">입출력 예 설명</h5>
 
-<p element-id="125">입출력 예 #1<br element-id="124">
+<p element-id="162">입출력 예 #1<br element-id="161">
 위에서 설명한 내용과 같습니다.</p>
 
-<p element-id="123">입출력 예 #2<br element-id="122">
-(2칸, 1칸)<br element-id="121">
-(1칸, 2칸)<br element-id="120">
-(1칸, 1칸, 1칸)<br element-id="119">
+<p element-id="160">입출력 예 #2<br element-id="159">
+(2칸, 1칸)<br element-id="158">
+(1칸, 2칸)<br element-id="157">
+(1칸, 1칸, 1칸)<br element-id="156">
 총 3가지 방법으로 멀리 뛸 수 있습니다.</p>
 
 
