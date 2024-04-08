@@ -1,5 +1,3 @@
-from collections import deque
-
 def is_valid(rotated_string):
     stack = []
     matching_brackets = {"(": ")", "[": "]", "{": "}"}
@@ -14,12 +12,8 @@ def is_valid(rotated_string):
 
 def solution(s):
     answer = 0
-    n = len(s)
-    queue = deque(s)
-
-    for _ in range(n):
-        rotated_string = "".join(queue)
-        if is_valid(rotated_string):
+    for i in range(len(s)):
+        if is_valid(s):
             answer += 1
-        queue.rotate(-1)
+        s = s[1:] + s[0]
     return answer
