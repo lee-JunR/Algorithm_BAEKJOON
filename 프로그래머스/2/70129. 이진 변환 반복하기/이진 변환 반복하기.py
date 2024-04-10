@@ -4,7 +4,7 @@ def solution(s):
     def 이진변환(s):
         answer[0] += 1
         answer[1] += s.count('0')
-        s = bin(len(s.replace('0', ''))).replace('0b','')
+        s = bin(len(s.replace('0', '')))[2:]
         if s == '1':
             return answer
         return 이진변환(s)
