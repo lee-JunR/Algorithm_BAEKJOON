@@ -3,7 +3,6 @@ def solution(sequence, k):
     right = 0  # 우측 포인터
     cur_sum = sequence[0]  # 현재 부분 수열의 합
     min_length = float('inf')  # 가장 짧은 부분 수열의 길이
-    result = None  # 결과 변수 초기화
 
     while right < len(sequence):
         if cur_sum == k:  # 부분 수열의 합이 k와 같으면
