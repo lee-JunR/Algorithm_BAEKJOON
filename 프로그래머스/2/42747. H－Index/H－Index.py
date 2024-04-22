@@ -1,9 +1,12 @@
 def solution(citations):
-    citations.sort(reverse=True)
     answer = 0
-    for num, citation in enumerate(citations):
-        if citation >= num+1: 
-            h_index = num+1
-            answer = h_index
+
+    citations.sort()
+    h_index = [0] * len(citations)
+    for i, citation in enumerate(citations):
+        n = sum([1 if citation <= c else 0 for c in citations[i:]])
+        h_index[i] = min(citation, n)
+    answer = max(h_index)
     return answer
+
 
