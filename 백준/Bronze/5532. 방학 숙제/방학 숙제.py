@@ -2,7 +2,8 @@ import sys
 from math import ceil
 
 def calculate_duration(amount, max_pages_per_day):
-    return ceil(amount / max_pages_per_day)
+    # 나머지가 있으면 1을 더해줌
+    return amount // max_pages_per_day + (1 if amount % max_pages_per_day else 0)
 
 # INPUT
 input = sys.stdin.readline
