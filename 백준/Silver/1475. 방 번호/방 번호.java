@@ -1,6 +1,3 @@
-// 방_번호_1475
-// 카운터 행렬로 필요한 자원을 만들고 셋트 개수 구하기.
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,12 +20,15 @@ public class Main {
     }
 
     // 6과 9의 합산 빈도 세팅
-    int feqSixNine = (n_dict.getOrDefault('6', 0) + n_dict.getOrDefault('9',0) + 1) / 2;
+    int feqSixNine = (n_dict.getOrDefault('6', 0) + n_dict.getOrDefault('9', 0) + 1) / 2;
 
     int max = feqSixNine;
-    for (char key : n_dict.keySet()) {
-      if(key != '6' && key != '9'){
-        max = Math.max(max, n_dict.get(key));
+    // entrySet()을 사용하여 키와 값을 동시에 접근
+    for (Map.Entry<Character, Integer> entry : n_dict.entrySet()) {
+      char key = entry.getKey();
+      int value = entry.getValue();
+      if (key != '6' && key != '9') {
+        max = Math.max(max, value);
       }
     }
     System.out.println(max);
