@@ -20,7 +20,6 @@ public class Main {
     int x = Integer.parseInt(br.readLine());
     br.close();
 
-    // Initialize variables
     Set<Integer> set = new HashSet<>();
     int count = 0;
 
@@ -32,8 +31,8 @@ public class Main {
       }
       set.add(i);
     }
-
-    // Output the result
+    
+    // Output
     System.out.println(count);
   }
 }
