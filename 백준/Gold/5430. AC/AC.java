@@ -10,58 +10,62 @@ public class Main {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     StringBuilder sb = new StringBuilder();
     int tc = Integer.parseInt(br.readLine());
-
+    
     for (int i = 0; i < tc; i++) {
+      sb.setLength(0);
       char[] cmds = br.readLine().toCharArray();
       int lengthOfArr = Integer.parseInt(br.readLine());
-      String inputArr = br.readLine().replace("[", "").replace("]", "").trim();
-      Deque<Integer> deque = new LinkedList<>();
+      String[] arr = br.readLine().replace("[", "").replace("]", "").split(",");
 
-      if (!inputArr.isEmpty()) {
-        for (String num : inputArr.split(",")) {
-          deque.offerLast(Integer.parseInt(num));
+      Deque<String> deque = new LinkedList<>();
+      for (int j = 0; j < lengthOfArr; j++) {
+        if (!arr[j].isEmpty()) {
+          deque.offerLast(arr[j]);
         }
       }
 
       boolean isReversed = false;
       boolean errorOccurred = false;
 
-      for (char cmd : cmds) {
-        if (cmd == 'R') {
-          isReversed = !isReversed;
-        } else if (cmd == 'D') {
-          if (deque.isEmpty()) {
-            sb.append("error\n");
-            errorOccurred = true;
+      for (char c : cmds) {
+        switch (c) {
+          case 'R':
+            isReversed = !isReversed;
             break;
-          } else {
-            if (isReversed) {
-              deque.pollLast();
-            } else {
-              deque.pollFirst();
+          case 'D':
+            if (deque.isEmpty()) {
+              sb.append("error");
+              errorOccurred = true;
+              break;
             }
-          }
+            if (isReversed) {
+              deque.removeLast();
+            } else {
+              deque.removeFirst();
+            }
+            break;
         }
+        if (errorOccurred) break;
       }
 
       if (!errorOccurred) {
         sb.append("[");
-        if (isReversed) {
-          while (!deque.isEmpty()) {
-            sb.append(deque.pollLast());
-            if (!deque.isEmpty()) sb.append(",");
+        while (!deque.isEmpty()) {
+          if (isReversed) {
+            sb.append(deque.removeLast());
+          } else {
+            sb.append(deque.removeFirst());
           }
-        } else {
-          while (!deque.isEmpty()) {
-            sb.append(deque.pollFirst());
-            if (!deque.isEmpty()) sb.append(",");
+          if (!deque.isEmpty()) {
+            sb.append(",");
           }
         }
-        sb.append("]\n");
+        sb.append("]");
       }
-    }
 
-    System.out.print(sb.toString());
+      System.out.println(sb.toString());
+    }
+    
     br.close();
   }
 }
