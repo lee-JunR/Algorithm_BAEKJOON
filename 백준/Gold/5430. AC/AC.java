@@ -1,71 +1,75 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
+// 우정님 에러 로직 분리 안한 풀이
+import java.io.*;
+import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
 
-public class Main {
+class Main {
 
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
     StringBuilder sb = new StringBuilder();
-    int tc = Integer.parseInt(br.readLine());
-    
-    for (int i = 0; i < tc; i++) {
-      sb.setLength(0);
-      char[] cmds = br.readLine().toCharArray();
-      int lengthOfArr = Integer.parseInt(br.readLine());
-      String[] arr = br.readLine().replace("[", "").replace("]", "").split(",");
 
-      Deque<String> deque = new LinkedList<>();
-      for (int j = 0; j < lengthOfArr; j++) {
-        if (!arr[j].isEmpty()) {
-          deque.offerLast(arr[j]);
+    int testCase = Integer.parseInt(br.readLine());
+    for (int i = 0; i < testCase; i++) {
+      String command = br.readLine();
+      int size = Integer.parseInt(br.readLine());
+      boolean direction = true;
+      boolean isError = false;
+
+      String input = br.readLine();
+      input = input.substring(1, input.length() - 1);
+
+      Deque<Integer> deque = new ArrayDeque<>();
+      if (!input.isEmpty()) {
+        String[] tokens = input.split(",");
+        for (int j = 0; j < size; j++) {
+          deque.addLast(Integer.parseInt(tokens[j].trim()));
         }
       }
 
-      boolean isReversed = false;
-      boolean errorOccurred = false;
-
-      for (char c : cmds) {
-        switch (c) {
+      for (int j = 0; j < command.length(); j++) {
+        switch (command.charAt(j)) {
           case 'R':
-            isReversed = !isReversed;
+            direction = !direction;
             break;
           case 'D':
             if (deque.isEmpty()) {
-              sb.append("error");
-              errorOccurred = true;
+              isError = true;
               break;
             }
-            if (isReversed) {
-              deque.removeLast();
+            if (direction) {
+              deque.pollFirst();
             } else {
-              deque.removeFirst();
+              deque.pollLast();
             }
             break;
         }
-        if (errorOccurred) break;
       }
 
-      if (!errorOccurred) {
+      if (isError) {
+        bw.write("error\n");
+      } else {
+        sb.setLength(0);
         sb.append("[");
-        while (!deque.isEmpty()) {
-          if (isReversed) {
-            sb.append(deque.removeLast());
-          } else {
-            sb.append(deque.removeFirst());
+        if (direction) {
+          while (!deque.isEmpty()) {
+            sb.append(deque.pollFirst()).append(',');
           }
-          if (!deque.isEmpty()) {
-            sb.append(",");
+        } else {
+          while (!deque.isEmpty()) {
+            sb.append(deque.pollLast()).append(',');
           }
         }
-        sb.append("]");
+        if (sb.length() > 1) {
+          sb.setLength(sb.length() - 1);
+        }
+        sb.append("]\n");
+        bw.write(sb.toString());
       }
-
-      System.out.println(sb.toString());
     }
-    
+
     br.close();
+    bw.close();
   }
 }
