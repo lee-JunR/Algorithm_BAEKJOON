@@ -1,9 +1,10 @@
-// 우정님 에러 로직 분리 안한 풀이
+// 개선 후
+
 import java.io.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-class Main {
+public class Main {
 
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -16,16 +17,17 @@ class Main {
       int size = Integer.parseInt(br.readLine());
       boolean direction = true;
       boolean isError = false;
+      sb.setLength(0);
+
 
       String input = br.readLine();
       input = input.substring(1, input.length() - 1);
 
+      String[] tokens = input.split(",");
+
       Deque<Integer> deque = new ArrayDeque<>();
-      if (!input.isEmpty()) {
-        String[] tokens = input.split(",");
-        for (int j = 0; j < size; j++) {
-          deque.addLast(Integer.parseInt(tokens[j].trim()));
-        }
+      for (int j = 0; j < size; j++) {
+        deque.addLast(Integer.parseInt(tokens[j].trim()));
       }
 
       for (int j = 0; j < command.length(); j++) {
@@ -45,12 +47,13 @@ class Main {
             }
             break;
         }
+        if (isError) {
+          bw.write("error\n");
+          break;
+        }
       }
 
-      if (isError) {
-        bw.write("error\n");
-      } else {
-        sb.setLength(0);
+      if (!isError) {
         sb.append("[");
         if (direction) {
           while (!deque.isEmpty()) {
