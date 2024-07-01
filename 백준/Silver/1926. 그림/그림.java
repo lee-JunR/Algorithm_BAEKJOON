@@ -33,28 +33,28 @@ public class Main {
     // 각 노드를 순회하면서 진행.
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < m; j++) {
-        if (board[i][j] == 1 && vis[i][j] != true) {
-          biggestArea = Math.max(biggestArea, BFS(i, j));
+        if (board[i][j] == 1 && !vis[i][j]) { // 이미 방문한 노드 체크
+          biggestArea = Math.max(biggestArea, DFS(i, j));
           countOfArea++;
         }
       }
     }
-    
+
     System.out.println(countOfArea);
     System.out.println(biggestArea);
-    
+
     br.close();
   }
 
-  private static int BFS(int x, int y) {
-    // bfs 시작
-    Queue<int[]> Q = new LinkedList<>(); // 행렬을 그대로 넣어야 하므로 int[] 로 초기화
+  private static int DFS(int x, int y) {
+    // dfs 시작
+    Deque<int[]> stack = new LinkedList<>(); // 행렬을 그대로 넣어야 하므로 int[] 로 초기화
     vis[x][y] = true;
-    Q.offer(new int[]{x, y}); // 큐에 시작점인 (x, y)을 삽입.
+    stack.push(new int[]{x, y}); // 스택에 시작점인 (x, y)을 삽입.
     int count = 1;
 
-    while (!Q.isEmpty()) {
-      int[] cur = Q.poll(); // 현재 값 큐에서 꺼내서
+    while (!stack.isEmpty()) {
+      int[] cur = stack.pop(); // 현재 값 스택에서 꺼내서
       int curX = cur[0];
       int curY = cur[1];
 
@@ -66,11 +66,11 @@ public class Main {
           continue; // 범위 밖일 경우 넘어감
         }
         if (vis[nx][ny] || board[nx][ny] != 1) {
-          continue; // 이미 방문한 칸이거나 파란 칸이 아닐 경우
+          continue; // 이미 방문한 칸이거나 1인 칸이 아닐 경우
         }
         count++;
-        vis[nx][ny] = true; // (nx, ny)를 방문했다고 명시
-        Q.offer(new int[]{nx, ny});
+        vis[nx][ny] = true; // (nx, ny)를 방문했다고 표시
+        stack.push(new int[]{nx, ny});
       }
     }
     return count;
