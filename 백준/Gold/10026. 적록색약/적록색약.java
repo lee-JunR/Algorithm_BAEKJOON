@@ -1,8 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class Main {
 
@@ -34,12 +34,12 @@ public class Main {
 
   private static int countAreas(boolean isBlind) {
     int count = 0;
-    visited = new boolean[n][n]; // 탐색마다 visited 배열을 새로 초기화
+    visited = new boolean[n][n];
 
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
         if (!visited[i][j]) {
-          BFS(i, j, board[i][j], isBlind);
+          DFS(i, j, board[i][j], isBlind);
           count++;
         }
       }
@@ -47,13 +47,13 @@ public class Main {
     return count;
   }
 
-  private static void BFS(int x, int y, char color, boolean isBlind) {
-    Queue<int[]> queue = new LinkedList<>();
+  private static void DFS(int x, int y, char color, boolean isBlind) {
+    Deque<int[]> stack = new LinkedList<>();
     visited[x][y] = true;
-    queue.offer(new int[]{x, y});
+    stack.push(new int[]{x, y});
 
-    while (!queue.isEmpty()) {
-      int[] current = queue.poll();
+    while (!stack.isEmpty()) {
+      int[] current = stack.pop();
       int cx = current[0];
       int cy = current[1];
 
@@ -69,15 +69,15 @@ public class Main {
           if (isBlind) {
             if ((color == 'R' || color == 'G') && (board[nx][ny] == 'R' || board[nx][ny] == 'G')) {
               visited[nx][ny] = true;
-              queue.offer(new int[]{nx, ny});
+              stack.push(new int[]{nx, ny});
             } else if (color == 'B' && board[nx][ny] == 'B') {
               visited[nx][ny] = true;
-              queue.offer(new int[]{nx, ny});
+              stack.push(new int[]{nx, ny});
             }
           } else {
             if (board[nx][ny] == color) {
               visited[nx][ny] = true;
-              queue.offer(new int[]{nx, ny});
+              stack.push(new int[]{nx, ny});
             }
           }
         }
