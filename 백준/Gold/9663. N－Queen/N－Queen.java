@@ -5,15 +5,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
+  private static int count = 0;
+
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     int n = Integer.parseInt(br.readLine());
     br.close();
 
-    System.out.println(countNQueens(n));
+    countNQueens(n);
+    System.out.println(count);
   }
 
-  private static boolean isSafe(int[] board, int row, int col, int n) {
+  private static boolean isSafe(int[] board, int row, int col) {
     for (int i = 0; i < row; i++) {
       if (board[i] == col ||
           board[i] - i == col - row ||
@@ -24,24 +27,22 @@ public class Main {
     return true;
   }
 
-  private static void countNQueensUtil(int[] board, int row, int n, int[] count) {
-    if (row == n) {
-      count[0]++;
+  private static void placeQueens(int[] board, int row, int n) {
+    if (row == n) { // 모든 행에 퀸 배치.
+      count++;
       return;
     }
 
     for (int col = 0; col < n; col++) {
-      if (isSafe(board, row, col, n)) {
+      if (isSafe(board, row, col)) { // 각열에 퀸을 배치해보고 isSafe로 확인.
         board[row] = col;
-        countNQueensUtil(board, row + 1, n, count);
+        placeQueens(board, row + 1, n);
       }
     }
   }
 
-  private static int countNQueens(int n) {
-    int[] count = {0};
+  private static void countNQueens(int n) {
     int[] board = new int[n];
-    countNQueensUtil(board, 0, n, count);
-    return count[0];
+    placeQueens(board, 0, n);
   }
 }
