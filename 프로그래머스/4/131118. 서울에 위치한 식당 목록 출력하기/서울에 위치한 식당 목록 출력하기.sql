@@ -5,7 +5,7 @@ SELECT
     I.FOOD_TYPE, --  REST_INFO
     I.FAVORITES, --   REST_INFO
     I.ADDRESS, -- REST_INFO
-    FORMAT(R.SCORE, 2) AS SCORE-- REST_REVIEW (리뷰의 평균 점수)
+    ROUND(R.SCORE, 2) AS SCORE-- REST_REVIEW (리뷰의 평균 점수)
     FROM
         REST_INFO AS I
         JOIN 
@@ -31,7 +31,7 @@ SELECT
 #     I.FOOD_TYPE, --  REST_INFO
 #     I.FAVORITES, --   REST_INFO
 #     I.ADDRESS, -- REST_INFO
-#     FORMAT(R.SCORE, 2) AS SCORE-- REST_REVIEW (리뷰의 평균 점수)
+#     ROUND(R.SCORE, 2) AS SCORE-- REST_REVIEW (리뷰의 평균 점수)
 #     FROM
 #         REST_INFO AS I
 #         LEFT OUTER JOIN 
