@@ -1,10 +1,8 @@
 SELECT COUNT(*) AS COUNT
 FROM ECOLI_DATA
 WHERE 
-    CONV(GENOTYPE,10,2) NOT LIKE '%1_'
+    GENOTYPE & 2 = 0
     AND
-    (
-    CONV(GENOTYPE,10,2) LIKE '%1' 
+    (GENOTYPE & 1 != 0 
     OR
-    CONV(GENOTYPE,10,2) LIKE '%1__'
-    );
+    GENOTYPE & 4 != 0);
