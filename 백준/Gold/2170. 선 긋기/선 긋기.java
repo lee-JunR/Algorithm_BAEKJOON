@@ -13,7 +13,8 @@ import java.util.StringTokenizer;
 // x,y 좌표계가 아니라 한 1차원 좌표계에서 x부터 y 까지의 길이임. (x1, x2 라는 변수로 해주지.. 너무해)
 // 그러면 겹쳐진 좌표를 체킹하는 알고리즘이 가장 중요한 알고리즘이 된다.
 // 1,3 과 2,5의 겹쳐진 부분을 어떻게 체킹할 것인가?
-// 이어진 좌표를 초기화해나가는 하나의 배열을 놓고 이 배열을 초기화해나가면서 진행하면 될듯?? 그리고 나중에 그 요소들을 순회하면서 진행하면 될것같다.
+// -> end = Math.max(end, current.y);
+// + 정렬한 후 진행해야 될듯. 그러면 뒷쪽은 체크 안해도 되니깐
 
 public class Main {
   static List<Point> list;
@@ -28,7 +29,6 @@ public class Main {
       Point points = new Point(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
       list.add(points);
     }
-    br.close();
 
     // 리스트 정렬
     Collections.sort(list, new Comparator<Point>() {
@@ -59,6 +59,8 @@ public class Main {
 
     totalLength += end - start;
     System.out.println(totalLength);
+    
+    br.close();
   }
 
   private static class Point {
