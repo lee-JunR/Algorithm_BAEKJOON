@@ -1,6 +1,6 @@
 SELECT D.ID, D.EMAIL, D.FIRST_NAME, D.LAST_NAME
 FROM DEVELOPERS D
-WHERE D.SKILL_CODE & (SELECT SUM(S.CODE) 
-                       FROM SKILLCODES S 
-                       WHERE S.CATEGORY = 'Front End')
+WHERE D.SKILL_CODE & (SELECT SUM(s.CODE) 
+                       FROM SKILLCODES s
+                       WHERE s.CATEGORY = 'Front End')
 ORDER BY D.ID;
